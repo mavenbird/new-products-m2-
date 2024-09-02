@@ -1,0 +1,108 @@
+<?php
+/**
+ * Mavenbird Technologies Private Limited
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://mavenbird.com/Mavenbird-Module-License.txt
+ *
+ * =================================================================
+ *
+ * @category   Mavenbird
+ * @package    Mavenbird_Newproduct
+ * @author     Mavenbird Team
+ * @copyright  Copyright (c) 2018-2024 Mavenbird Technologies Private Limited ( http://mavenbird.com )
+ * @license    http://mavenbird.com/Mavenbird-Module-License.txt
+ */
+?>
+<?php
+if (($_products = $block->getProductCollection()) && $_products->getSize()):
+    $image_url=$block->getViewFileUrl('Mavenbird_Newproduct::images/ajax_loader.gif');
+    $unique_slider_key = $block->getUniqueSliderKey();
+    $np_content_id="cwsNewProducts-".$unique_slider_key;?>
+    <div class="cwsNew listNewProduct" id="<?= $escaper->escapeHtmlAttr($np_content_id);?>">
+        <div id="np_scroll_loading" style="display:none;"><img src="<?= $escaper->escapeUrl($image_url); ?>" alt="Loading..." /></div>
+       <?php if ($block->getShowHeading()): ?>
+        <div class="title"><h3><?= $escaper->escapeHtml(__($block->getHeading())) ;?></h3></div>
+        <?php endif; ?>
+        <div class="block-content">
+            <?php $suffix = $block->getNameInLayout(); ?>
+            <?php $iterator = 1; ?>
+            <ol class="product-items">
+            
+                <?php foreach ($_products->getItems() as $_product): ?>            
+                    <?= /* @escapeNotVerified */($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
+                    <div class="product-item-info">
+                        <a class="product-item-photo" href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                           title="<?= $escaper->escapeHtmlAttr($block->stripTags($_product->getName(), null, true)) ?>">
+                            <?= $block->getImage($_product, 'side_column_widget_product_thumbnail')->toHtml(); ?>
+                        </a>
+                        <div class="product-item-details">
+                             <div style="padding: 0 2px;"><?= $block->getProductDetailsHtml($_product); ?></div>
+                            <strong class="product-item-name">
+                                <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                                   title="<?= $escaper->escapeHtmlAttr($block->stripTags($_product->getName(), null, true)) ?>" class="product-item-link">
+                                    <?= $escaper->escapeHtml($block->helper(\Magento\Catalog\Helper\Output::class)->productAttribute($_product, $_product->getName(), 'name')) ?>
+                                </a>
+                            </strong>
+                            <?= $escaper->escapeHtml($block->getProductPrice($_product)) ?>
+                            <div class="product-item-actions">
+                                <div class="actions-primary">
+                                    <?php if ($_product->isSaleable()): ?>
+                                        <?php if ($_product->getTypeInstance()->hasRequiredOptions($_product)): ?>
+                                            <button type="button" title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                    class="action tocart primary"
+                                                    data-mage-init='{"redirectUrl":{"url":"<?= $escaper->escapeUrl($block->getAddToCartUrl($_product)) ?>"}}'>
+                                                <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                            </button>
+                                        <?php else: ?>
+                                            <?php
+                                                $postDataHelper = $block->helper(\Magento\Framework\Data\Helper\PostHelper::class);
+                                                $postData = $postDataHelper->getPostData($block->getAddToCartUrl($_product), ['product' => $_product->getEntityId()]);
+                                            ?>
+                                            <button type="button" title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                    class="action tocart primary"
+                                                    data-post='<?= $escaper->escapeHtmlAttr($postData); ?>'>
+                                                <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                            </button>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <?php if ($_product->getIsSalable()): ?>
+                                            <div class="stock available" title="<?= $escaper->escapeHtmlAttr(__('Availability')) ?>">
+                                                <span><?= $escaper->escapeHtml(__('In stock')) ?></span>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="stock unavailable" title="<?= $escaper->escapeHtmlAttr(__('Availability')) ?>">
+                                                <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?=($iterator == count($_products->getItems())+1) ? '</li>' : '' ?>
+                    
+                <?php endforeach; ?>
+            </ol>
+            <?php if (!$block->getShowSlider()): ?>
+              <div class="mageNewToolbar toolbar bottom"> <?= $block->getPagerHtml();  ?></div>
+                <script>
+                requirejs([
+                    'jquery',
+                    'mavenbirdNewProduct'                
+                ], function ($) {                    
+                    var np_content_id="<?= $escaper->escapeJs($np_content_id);?>";
+                    var widget = $('#'+np_content_id).mavenbirdNewProduct({
+                        "nav":" ",    
+                        "autoplay":" "
+                    });                        
+                });    
+                </script>    
+            <?php endif; ?>    
+        </div>
+    </div>
+<?php endif; ?>
