@@ -19,14 +19,7 @@
  */ -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
  <menu>    
-   <add id="Mavenbird_Newproduct::newproduct" title="New Products" module="Mavenbird_Newproduct" sortOrder="100" parent="Magento_Catalog::catalog" resource="Mavenbird_Newproduct::newproduct" />
-   <add id="Mavenbird_Newproduct::grid_catalog" title="Add New Products" module="Mavenbird_Newproduct" sortOrder="10" action="newproduct/manage" resource="Mavenbird_Newproduct::grid_catalog" parent="Mavenbird_Newproduct::newproduct" />
-    
-   <update id="Magento_Backend::mbmenu" title="Mavenbird" module="Magento_Backend" sortOrder="10" resource="Magento_Backend::mbmenu" />
-
-   <add id="Mavenbird_Newproduct::Heading" title="New Products" module="Mavenbird_Newproduct" sortOrder="20" parent="Magento_Backend::mbmenu" resource="Mavenbird_Newproduct::Heading" />
-   <add id="Mavenbird_Newproduct::configuration" title="Configuration" module="Mavenbird_Newproduct" sortOrder="180" parent="Mavenbird_Newproduct::Heading" action="adminhtml/system_config/edit/section/newproduct" resource="Mavenbird_Newproduct::configuration"/>
-   <add id="Mavenbird_Newproduct::grid" title="Add New Products"  action="newproduct/manage" module="Mavenbird_Newproduct" sortOrder="40" parent="Mavenbird_Newproduct::Heading" resource="Mavenbird_Newproduct::newproduct"/>
+    <add id="Mavenbird_Newproduct::grid" title="MavenBird New Products"  action="newproduct/manage" module="Mavenbird_Newproduct" sortOrder="40" parent="Magento_Catalog::inventory" resource="Mavenbird_Newproduct::newproduct"/>
     
  </menu>
 </config>
