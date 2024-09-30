@@ -29,7 +29,8 @@ define([
             nav: '',
             autoplay: '',
             slider_id: '', // Ensure slider_id is provided in options
-            product_count: 0 // Ensure product_count is provided and is a number
+            product_count: 0, // Ensure product_count is provided and is a number
+            dots: ''
         },
         is_loading: 0,
 
@@ -129,10 +130,11 @@ define([
         addSlider: function () {
             var nav = this.options.nav === "true";
             var autoplay = this.options.autoplay === "true";
+            var dots = this.options.dots === "true";
             var $owl = $('#' + this.options.slider_id);
             var itemAmount = parseInt(this.options.product_count, 10); 
-            console.log("product_count:", this.options.product_count);
-            console.log("itemAmount:", itemAmount);
+            // console.log("product_count:", this.options.product_count);
+            // console.log("itemAmount:", itemAmount);
             var loopOptions = [
                 itemAmount > 1,
                 itemAmount > 2,
@@ -145,7 +147,7 @@ define([
                 slideSpeed: 200,
                 paginationSpeed: 800,
                 nav: nav,
-                dots: true,
+                dots: dots,
                 autoplay: autoplay,
                 margin: 20,
                 responsiveClass: true,

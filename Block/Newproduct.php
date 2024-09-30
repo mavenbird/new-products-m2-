@@ -87,6 +87,11 @@ class Newproduct extends \Magento\Catalog\Block\Product\AbstractProduct
     protected $compareHelper;
 
     /**
+     * @var bool
+     */
+    protected $dots;
+
+    /**
      * @param \Magento\Catalog\Block\Product\Context $context
      * @param \Magento\Framework\App\ResourceConnection $resource
      * @param \Magento\Framework\Url\Helper\Data $urlHelper
@@ -230,6 +235,7 @@ class Newproduct extends \Magento\Catalog\Block\Product\AbstractProduct
         $this->setAutoscroll((bool)$this->_sliderConfig['autoscroll']);
         //$this->setPagination((bool)$this->_sliderConfig['pagination']);
         $this->setNavarrow((bool)$this->_sliderConfig['navarrow']);
+        $this->setDots((bool)$this->_sliderConfig['dots']);
     }
     
     /**
@@ -558,4 +564,20 @@ class Newproduct extends \Magento\Catalog\Block\Product\AbstractProduct
     {
         return $this->compareHelper;
     }
+
+    // /**
+    //  * Get Dots
+    //  */
+    // public function getDots()
+    // {
+    //     return $this->dots;
+    // }
+
+    // /**
+    //  * Set Dots
+    //  */
+    // public function setDots($dots)
+    // {
+    //     $this->dots = $dots;
+    // }
 }

@@ -158,12 +158,14 @@ $np_content_id="cwsNewProducts-".$unique_slider_key;
             <?php $navigation = $block->getNavarrow() == '1' ? 'true' : 'false';
             $autoplay=$block->getAutoscroll()=='1' ? 'true':'false';
             $slider_id=$np_slider_id;
+            $dots=$block->getDots()=='1' ? 'true':'false';
             ?>
             <?php else: ?>
                 <?php
                 $navigation="";
                 $autoplay="";
                 $slider_id="";
+                $dots="";
                 ?>    
             <?php endif; ?>    
             <script>
@@ -177,7 +179,9 @@ $np_content_id="cwsNewProducts-".$unique_slider_key;
                     "nav":"<?= $escaper->escapeJs($navigation); ?>",    
                     "product_count":product_count,
                     "autoplay":"<?= $escaper->escapeJs($autoplay); ?>",
-                    "slider_id":"<?= $escaper->escapeJs($slider_id); ?>"                });                        
+                    "slider_id":"<?= $escaper->escapeJs($slider_id); ?>",
+                    "dots":"<?= $escaper->escapeJs($dots); ?>"
+                });                        
             });    
             </script>
     <!--</div>-->
