@@ -1,6 +1,6 @@
 {
     "name": "mavenbird/module-new-product",
-    "description": "Enhance Magento 2 store shipping by selectively restricting carrier methods based on business rules and customer needs.",
+    "description": "Magento 2 module for managing and displaying new products in your store.",
     "require": {
         "php": ">=8.0.0"
     },
@@ -20,7 +20,7 @@
             "registration.php"
         ],
         "psr-4":  { 
-            "Mavenbird\\Shiprestriction\\": ""
+            "Mavenbird\\Newproduct\\": ""
         }
     }
 }
